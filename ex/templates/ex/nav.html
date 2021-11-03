@@ -7,7 +7,7 @@
   </ul>
   <ul class="nav navbar-nav">
       {% if user.is_authenticated %}
-      <li><a href="{% url 'login' %}">Logout</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
       {% else %}
       <li><a href="{% url 'login' %}">Login</a></li>
       {% endif %}
@@ -15,4 +15,12 @@
   <ul class="nav navbar-nav">
       <li><a href="{% url 'articles' %}">Articles</a></li>
   </ul>
+  {% if user.is_authenticated %}
+  <ul class="nav navbar-nav">
+    <li><a href="{% url 'publications' %}">Publications</a></li>
+  </ul>
+  <ul class="nav navbar-nav">
+    <li><a href="{% url 'favourites' %}">Favourites</a></li>
+  </ul>
+  {% endif %}
 </nav>
