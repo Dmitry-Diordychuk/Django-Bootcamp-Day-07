@@ -60,6 +60,7 @@ class ArticleDetail(DetailView, FormMixin):
 	context_object_name = 'article'
 	form_class = AddFavoriteForm
 	initial = {}
+	extra_context = {"login_form": PrettyAuthenticationForm()}
 
 	def setup(self, request, *args, **kwargs) -> None:
 		self.initial["user"] = request.user.id
