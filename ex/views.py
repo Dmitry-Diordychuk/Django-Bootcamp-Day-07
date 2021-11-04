@@ -13,6 +13,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from .forms import CreateArticleForm, AddFavoriteForm
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.
 class Home(RedirectView):
@@ -21,9 +22,12 @@ class Home(RedirectView):
 
 class Articles(ListView):
 	model = Article
+	extra_context = {"login_form": AuthenticationForm()}
 
 
 class Login(LoginView):
+	extra_context = {"login_form": AuthenticationForm()}
+
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
 			return redirect(reverse_lazy('home'))
@@ -89,6 +93,7 @@ class Register(SuccessMessageMixin, CreateView):
 	success_url = reverse_lazy('login')
 	form_class = UserCreationForm
 	template_name = 'registration/register.html'
+	extra_context = {"login_form": AuthenticationForm()}
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:

@@ -10,11 +10,11 @@
 		<th>Synopsis</th>
 		<th></th>
 	</tr>
-	{% for article in object_list %}
+	{% for article in object_list|dictsortreversed:"created" %}
 	<tr>
 		<td>{{ article.title }}</td>
-		<td>{{ article.created }}</td>
-		<td>{{ article.synopsis }}</td>
+		<td>{{ article.created|timesince }}</td>
+		<td>{{ article.synopsis|truncatechars:21 }}</td>
 		<td><a href="{% url 'detail' article.pk %}">Detail</a></td>
 	</tr>
 	{% endfor %}

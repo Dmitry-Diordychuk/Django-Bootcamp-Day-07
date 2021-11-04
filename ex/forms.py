@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import fields
 from django.forms.widgets import HiddenInput
-from .models import Article, UserFavouriteArticle
+from .models import Article, UserFavouriteArticle, User
 
 class CreateArticleForm(forms.ModelForm):
 	class Meta:

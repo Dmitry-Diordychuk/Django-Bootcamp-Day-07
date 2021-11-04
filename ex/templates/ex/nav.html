@@ -1,7 +1,9 @@
 <nav class="navbar navbar-default">
+  {% if user.is_authenticated %}
   <ul>
-    <li><p>{{ user }}</p></li>
+    <li><p>Logged as {{ user }}</p></li>
   </ul>
+  {% endif %}
   <ul class="nav navbar-nav">
     <li><a href="{% url 'home' %}">Home</a></li>
   </ul>
@@ -11,7 +13,13 @@
   </ul>
   {% else %}
   <ul>
-      <li><a href="{% url 'login' %}">Login</a></li>
+      <li>
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          {{ login_form.as_p }}
+          <input type="submit" value="login" />
+        </form>
+      </li>
   </ul>
   <ul>
     <li><a href="{% url 'register' %}">Register</a></li>
