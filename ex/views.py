@@ -137,10 +137,11 @@ class AddFavorite(CreateView):
 	template_name = "ex/favourite_list.html"
 	success_url = reverse_lazy("favourites")
 
+	def form_invalid(self, form):
+		return redirect(reverse_lazy('favourites'))
+
 	def get(self, request, *args, **kwargs):
-		if not request.user.is_authenticated:
-			return redirect(reverse_lazy('home'))
-		return super().get(request, *args, **kwargs)
+		return redirect(reverse_lazy('home'))
 
 	def post(self, request, *args, **kwargs):
 		if not request.user.is_authenticated:
