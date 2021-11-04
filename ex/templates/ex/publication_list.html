@@ -14,7 +14,7 @@
 	<tr>
 		<td>{{ article.title }}</td>
 		<td>{{ article.created|timesince }}</td>
-		<td>{{ article.synopsis|truncatechars:21 }}</td>
+		<td>{{ article.synopsis|truncatechars:20 }}</td>
 		<td><a href="{% url 'detail' article.pk %}">Detail</a></td>
 	</tr>
 	{% endfor %}

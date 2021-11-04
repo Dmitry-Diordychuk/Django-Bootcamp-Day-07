@@ -1,39 +1,49 @@
-<nav class="navbar navbar-default">
-  {% if user.is_authenticated %}
-  <ul>
-    <li><p>Logged as {{ user }}</p></li>
-  </ul>
-  {% endif %}
-  <ul class="nav navbar-nav">
-    <li><a href="{% url 'home' %}">Home</a></li>
-  </ul>
-  {% if user.is_authenticated %}
-  <ul class="nav navbar-nav">
-      <li><a href="{% url 'logout' %}">Logout</a></li>
-  </ul>
-  {% else %}
-  <ul>
-      <li>
-        <form method="post" action="{% url 'login' %}">
-          {% csrf_token %}
-          {{ login_form.as_p }}
-          <input type="submit" value="login" />
-        </form>
-      </li>
-  </ul>
-  <ul>
-    <li><a href="{% url 'register' %}">Register</a></li>
-  </ul>
-  {% endif %}
-  <ul class="nav navbar-nav">
-      <li><a href="{% url 'articles' %}">Articles</a></li>
-  </ul>
-  {% if user.is_authenticated %}
-  <ul class="nav navbar-nav">
-    <li><a href="{% url 'publications' %}">Publications</a></li>
-  </ul>
-  <ul class="nav navbar-nav">
-    <li><a href="{% url 'favourites' %}">Favourites</a></li>
-  </ul>
-  {% endif %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <span class="glyphicon glyphicon-book the-icon" aria-hidden="true"></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'articles' %}">Articles</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'favourites' %}">Favourites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'publications' %}">Publications</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link disabled">Logged as {{ user }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+      </ul>
+      {% else %}
+      <form class="d-flex" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <button class="btn btn-outline-success" type="submit">Login</button>
+      </form>
+      {% endif %}
+      <!-- <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+    </div>
+  </div>
 </nav>

@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import CreateArticleForm, AddFavoriteForm
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.forms import AuthenticationForm
+from .forms import PrettyAuthenticationForm
 
 # Create your views here.
 class Home(RedirectView):
@@ -22,11 +23,11 @@ class Home(RedirectView):
 
 class Articles(ListView):
 	model = Article
-	extra_context = {"login_form": AuthenticationForm()}
+	extra_context = {"login_form": PrettyAuthenticationForm()}
 
 
 class Login(LoginView):
-	extra_context = {"login_form": AuthenticationForm()}
+	extra_context = {"login_form": PrettyAuthenticationForm()}
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
@@ -93,7 +94,7 @@ class Register(SuccessMessageMixin, CreateView):
 	success_url = reverse_lazy('login')
 	form_class = UserCreationForm
 	template_name = 'registration/register.html'
-	extra_context = {"login_form": AuthenticationForm()}
+	extra_context = {"login_form": PrettyAuthenticationForm()}
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
