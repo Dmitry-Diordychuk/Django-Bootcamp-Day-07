@@ -4,7 +4,7 @@
 {% block body %}
 {% include 'ex/nav.html' %}
 <ul>
-	{% for favorite in object_list %}
+	{% for favorite in object_list|dictsortreversed:"article.created" %}
 	<li><a href="{% url 'detail' favorite.article.id %}">{{ favorite }}</a></li>
 	{% endfor %}
 </ul>
