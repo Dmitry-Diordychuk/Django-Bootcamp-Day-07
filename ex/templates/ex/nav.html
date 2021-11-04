@@ -1,45 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}">
-      <span class="glyphicon glyphicon-book the-icon" aria-hidden="true"></span>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'articles' %}">Articles</a>
-        </li>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <span class="glyphicon glyphicon-book the-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="{% if current_page == 'articles' %}active{% endif %}"><a class="nav-link" href="{% url 'articles' %}">Articles</a></li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'favourites' %}">Favourites</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'publications' %}">Publications</a>
-        </li>
+        <li class="{% if current_page == 'favourites' %}active{% endif %}"><a class="nav-link" href="{% url 'favourites' %}">Favourites</a></li>
+        <li class="{% if current_page == 'publications' %}active{% endif %}"><a class="nav-link" href="{% url 'publications' %}">Publications</a></li>
         {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">Register</a>
-        </li>
+        <li class="{% if current_page == 'register' %}active{% endif %}"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
         {% endif %}
       </ul>
+
       {% if user.is_authenticated %}
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link disabled">Logged as {{ user }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-        </li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text navbar-left">Logged as {{ user }}</p></li>
+        <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
       </ul>
       {% else %}
-      <form class="d-flex" method="post" action="{% url 'login' %}">
+      <form class="navbar-form navbar-right" method="post" action="{% url 'login' %}">
         {% csrf_token %}
-        {{ login_form.as_p }}
-        <button class="btn btn-outline-success" type="submit">Login</button>
+        <div class="form-group">
+          {{ login_form }}
+        </div>
+        <button class="btn btn-default" type="submit">Login</button>
       </form>
       {% endif %}
-    </div>
-  </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>

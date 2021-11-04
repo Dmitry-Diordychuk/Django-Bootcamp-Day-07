@@ -3,21 +3,23 @@
 
 {% block body %}
 {% include 'ex/nav.html' %}
-<table>
+<table class="table">
 	<tr>
 		<th>Title</th>
-		<th>Created</th>
 		<th>Synopsis</th>
+		<th>Created</th>
+		<th>When</th>
 		<th></th>
 	</tr>
 	{% for article in object_list|dictsortreversed:"created" %}
 	<tr>
 		<td>{{ article.title }}</td>
-		<td>{{ article.created|timesince }}</td>
 		<td>{{ article.synopsis|truncatechars:20 }}</td>
-		<td><a href="{% url 'detail' article.pk %}">Detail</a></td>
+		<td>{{ article.created }}</td>
+		<td>{{ article.created|timesince }}</td>
+		<td><a class="btn btn-info" href="{% url 'detail' article.pk %}">Read</a></td>
 	</tr>
 	{% endfor %}
 </table>
-<a href="{% url 'publish' %}">Create new publication</a>
+<a class="btn btn-success" href="{% url 'publish' %}">Create new publication</a>
 {% endblock %}

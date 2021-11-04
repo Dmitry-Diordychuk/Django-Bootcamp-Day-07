@@ -3,18 +3,23 @@
 
 {% block body %}
 {% include 'ex/nav.html' %}
-<ul>
-	<li>Title: {{ article.title }}</li>
-	<li>Author: {{ article.author }}</li>
-	<li>Created: {{ article.created }}</li>
-	<li>Synopsis: {{ article.synopsis }}</li>
-	<li>Content: {{ article.content }}</li>
-</ul>
+<dl class="dl-horizontal">
+	<dt>Title:</dt>
+	<dd>{{ article.title }}</dd>
+	<dt>Author:</dt>
+	<dd>{{ article.author }}</dd>
+	<dt>Created:</dt>
+	<dd>{{ article.created }}</dd>
+	<dt>Synopsis:</dt>
+	<dd>{{ article.synopsis }}</dd>
+	<dt>Content:</dt>
+	<dd>{{ article.content }}</dd>
+</dl>
 {% if user.is_authenticated %}
 <form method="post" action="{% url 'add-favourite' %}">
 	{% csrf_token %}
 	{{ form }}
-	<input type="submit" value="Favorite" />
+	<button type="submit" class="btn btn-primary">Favorite</button>
 </form>
 {% endif %}
 {% endblock %}

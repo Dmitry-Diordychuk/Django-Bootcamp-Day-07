@@ -23,7 +23,10 @@ class Home(RedirectView):
 
 class Articles(ListView):
 	model = Article
-	extra_context = {"login_form": PrettyAuthenticationForm()}
+	extra_context = {
+		"login_form": PrettyAuthenticationForm(),
+		"current_page": "articles",
+	}
 
 
 class Login(LoginView):
@@ -44,6 +47,9 @@ class Login(LoginView):
 class Publications(ListView):
 	model = Article
 	template_name = 'ex/publication_list.html'
+	extra_context = {
+		"current_page": "publications",
+	}
 
 	def get_queryset(self):
 		return Article.objects.filter(author=self.request.user)
@@ -76,6 +82,9 @@ class Logout(LogoutView):
 class Favourites(ListView):
 	model = Article
 	template_name = 'ex/favourite_list.html'
+	extra_context = {
+		"current_page": "favourites",
+	}
 
 	def get_queryset(self):
 		articles = (
@@ -95,7 +104,10 @@ class Register(SuccessMessageMixin, CreateView):
 	success_url = reverse_lazy('login')
 	form_class = UserCreationForm
 	template_name = 'registration/register.html'
-	extra_context = {"login_form": PrettyAuthenticationForm()}
+	extra_context = {
+		"login_form": PrettyAuthenticationForm(),
+		"current_page": "register",
+	}
 
 	def get(self, request, *args, **kwargs):
 		if request.user.is_authenticated:
