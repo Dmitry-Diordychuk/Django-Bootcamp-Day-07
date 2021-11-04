@@ -10,4 +10,11 @@
 	<li>Synopsis: {{ article.synopsis }}</li>
 	<li>Content: {{ article.content }}</li>
 </ul>
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'add-favourite' %}">
+	{% csrf_token %}
+	{{ form }}
+	<input type="submit" value="Favorite" />
+</form>
+{% endif %}
 {% endblock %}

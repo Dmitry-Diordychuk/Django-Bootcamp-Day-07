@@ -1,0 +1,12 @@
+{% extends 'ex/base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+{% include 'ex/nav.html' %}
+<h1>Register</h1>
+<form method="post" action="{% url 'register' %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="register" />
+</form>
+{% endblock %}

@@ -5,13 +5,18 @@
   <ul class="nav navbar-nav">
     <li><a href="{% url 'home' %}">Home</a></li>
   </ul>
+  {% if user.is_authenticated %}
   <ul class="nav navbar-nav">
-      {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}">Logout</a></li>
-      {% else %}
-      <li><a href="{% url 'login' %}">Login</a></li>
-      {% endif %}
   </ul>
+  {% else %}
+  <ul>
+      <li><a href="{% url 'login' %}">Login</a></li>
+  </ul>
+  <ul>
+    <li><a href="{% url 'register' %}">Register</a></li>
+  </ul>
+  {% endif %}
   <ul class="nav navbar-nav">
       <li><a href="{% url 'articles' %}">Articles</a></li>
   </ul>

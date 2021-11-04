@@ -18,3 +18,6 @@ class UserFavouriteArticle(models.Model):
 
 	def __str__(self):
 		return str(self.article.title)
+
+	class Meta:
+		unique_together = ["user", "article"]

@@ -8,7 +8,10 @@ from .views import \
     Login, \
     Publications, \
     ArticleDetail, \
-    LogoutView
+    LogoutView, \
+    Register, \
+    ArticleCreate, \
+    AddFavorite
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
@@ -18,4 +21,7 @@ urlpatterns = [
     path('detail/<str:pk>', ArticleDetail.as_view(), name='detail'),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('favourites/', Favourites.as_view(), name="favourites"),
+    path('register/', Register.as_view(), name='register'),
+    path('publish/', ArticleCreate.as_view(), name='publish'),
+    path('favourites/add/', AddFavorite.as_view(), name='add-favourite'),
 ]

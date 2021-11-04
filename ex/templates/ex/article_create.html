@@ -1,0 +1,12 @@
+{% extends 'ex/base.html' %}
+{% block title %}Create article{% endblock %}
+
+{% block body %}
+{% include 'ex/nav.html' %}
+<h1>Publish</h1>
+<form method="post" action="{% url 'publish' %}">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="submit" />
+</form>
+{% endblock %}
